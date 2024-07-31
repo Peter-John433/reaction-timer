@@ -9,29 +9,48 @@
         </div>
 
         <div v-if="showGame">
-            <Game :deGame="myGame" />
+            <Game 
+                :deGame="myGame" 
+                :delay="delay" 
+                @end="endGame"
+             />
         </div>
+
+        <Result 
+            :score="score" 
+            v-if="showscore" 
+        />
     </div>
 </template>
 
 <script>
-    import Game from './reaction-timer/Game.vue';
+    import Game from './reaction-timer/Game.vue'
+    import Result from './reaction-timer/Result.vue'
 
     export default{
-        components:{ Game },
+        components:{ Game, Result },
         data() {
             return {
                 myGame: true,
                 showGame: false,
-                timer: null
+                delay: null,
+                score: null,
+                showscore: false
             }
         },
 
         methods:{
             playGame(){
-                this.timer = 2000 + Math.random() * 5000;
+                this.delay = 2000 + Math.random() * 5000;
                 this.showGame = true;
-                console.log(this.timer)
+                console.log(this.delay)
+                this.showscore = false
+            },
+
+            endGame(reactionTimer){
+                this.score = reactionTimer
+                this.showGame = false
+                this.showscore = true
             }
         }
     }
@@ -56,8 +75,4 @@
         color: white;
         box-shadow: 1px 1px 2px  black;
     }
-
-    /* .isResult{
-        
-    } */
 </style>
