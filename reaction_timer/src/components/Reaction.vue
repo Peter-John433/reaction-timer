@@ -75,4 +75,9 @@
         color: white;
         box-shadow: 1px 1px 2px  black;
     }
+
+    button[disabled]{
+        opacity: 0.2;
+        cursor: not-allowed;
+    }
 </style>
